@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "XSMNewFeatureViewController.h"
+#import "XSMAccount.h"
+#import "XSMMainViewController.h"
+#import "XSMOAuthViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +21,47 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    
+    //根据userDefaults存储的version设置rootVC
+    NSString *versionKey = @"CFBundleVersion";
+    NSString *formerVersion = [[NSUserDefaults standardUserDefaults] valueForKey:versionKey];
+    NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] valueForKey:versionKey];
+    
+    //获取已保存的帐号
+    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSString *accountPath = [documents stringByAppendingPathComponent:@"account.archive"];
+    
+//    NSLog(@"%@",accountPath);
+    
+    XSMAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:accountPath];
+ 
+    if (account) {
+        //如果formerVersion储存的和当前info.plist里的不同，就显示new feature;
+        if ([formerVersion isEqualToString:currentVersion]) {
+            XSMMainViewController *mainVC = [[XSMMainViewController alloc] init];
+            [self.window setRootViewController:mainVC];
+
+        } else {
+            XSMNewFeatureViewController *newFeatureVC = [[XSMNewFeatureViewController alloc] init];
+            [self.window setRootViewController:newFeatureVC];
+        }
+        
+        //将currentVersion 保存到userDefaults当中
+        [[NSUserDefaults standardUserDefaults] setValue:currentVersion forKey:versionKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+    } else {
+        //OAuth页面
+        XSMOAuthViewController *authVC = [[XSMOAuthViewController alloc] init];
+        [self.window setRootViewController:authVC];
+    }
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

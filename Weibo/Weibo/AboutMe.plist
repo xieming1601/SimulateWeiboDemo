@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>余额</string>
+		<key>pic</key>
+		<string>mine_balance</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>优惠券</string>
+		<key>pic</key>
+		<string>mine_coupon</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>常用地址</string>
+		<key>pic</key>
+		<string>mine_address</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>分享给好友</string>
+		<key>pic</key>
+		<string>mine_share</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>绑定实体卡</string>
+		<key>pic</key>
+		<string>mine_card</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>意见反馈</string>
+		<key>pic</key>
+		<string>mine_feedback</string>
+    </dict>
+    <dict>
+        <key>name</key>
+        <string>更多设置</string>
+        <key>pic</key>
+        <string>mine_more</string>
+    </dict>
+</array>
+</plist>
